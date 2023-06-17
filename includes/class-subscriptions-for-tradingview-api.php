@@ -141,12 +141,14 @@ if ( ! class_exists( 'Subscriptions_For_TradingView_Api' ) ) {
                 $data = wp_remote_retrieve_body($resp);
                 $datas = (array)json_decode( $data );
             }
-            
-            
+
             if (empty($datas)) {
                 return [];
             }
             
+            $headers['origin'] = 'https://www.tradingview.com';
+            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
             $resp = wp_remote_post( $this->urls["pub_scripts"], 
                 array(
                     'headers' => $headers,
